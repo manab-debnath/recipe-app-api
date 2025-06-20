@@ -14,6 +14,10 @@ if (ENV.NODE_ENV == "production") job.start();
 app.use(cors());
 app.use(express.json());
 
+app.get("/api/health", (req, res) => {
+	res.send({ health: "ok" });
+});
+
 app.post("/api/favorites", async (req, res) => {
 	try {
 		const { userId, recipeId, title, image, cookTime, servings } = req.body;
