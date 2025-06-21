@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import { ENV } from "./config/env.js";
 import { db } from "./config/db.js";
 import { favoritesTable } from "./db/schema.js";
@@ -9,13 +8,12 @@ import job from "./config/cron.js";
 const app = express();
 const port = ENV.PORT;
 
-if (ENV.NODE_ENV == "production") job.start();
+if (ENV.NODE_ENV === "production") job.start();
 
-app.use(cors());
 app.use(express.json());
 
 app.get("/api/health", (req, res) => {
-	res.send({ health: "ok" });
+	res.status(200).json({ health: "ok" });
 });
 
 app.post("/api/favorites", async (req, res) => {
