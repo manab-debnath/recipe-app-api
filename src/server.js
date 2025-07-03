@@ -38,7 +38,7 @@ app.post("/api/favorites", async (req, res) => {
 
 		res.status(201).json(newFavorite[0]);
 	} catch (error) {
-		console.log("Error adding favorite", error);
+		console.error("Error adding favorite", error);
 		res.status(500).json({ error: "Something went wrong" });
 	}
 });
@@ -51,7 +51,7 @@ app.get("/api/favorites/:userId", async (req, res) => {
 			.from(favoritesTable)
 			.where(eq(favoritesTable.userId, userId));
 
-		res.status(200).json({ userFavorites });
+		res.status(200).json(userFavorites);
 	} catch (error) {
 		console.log("Error fetching favorites", error);
 		res.status(500).json({ error: "Something went wrong" });
